@@ -1,4 +1,5 @@
 /*
+
 Suppose we have a class:
 public class Foo {
   public void first() { print("first"); }
