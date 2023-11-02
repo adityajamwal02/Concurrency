@@ -27,3 +27,55 @@ Example 2:
 Input: n = 5
 Output: "0102030405"
 */
+
+
+class ZeroEvenOdd {
+private:
+    int n;
+
+public:
+    mutex m;
+    int count=0;
+    condition_variable cv;
+
+    ZeroEvenOdd(int n) {
+        this->n = n;
+    }
+
+    // printNumber(x) outputs "x", where x is an integer.
+    void zero(function<void(int)> printNumber){
+        for(int i=0;i<n;i++){
+            unique_lock<mutex> ul(m);
+            cv.wait(ul,[&]{
+                return count==0 ? true : false;
+            });
+            printNumber(0);
+            count=(i%2==0) ? 1 : 2;
+            cv.notify_all();
+        }        
+    }
+
+    void even(function<void(int)> printNumber) {
+        for(int i=2;i<=n;i+=2){
+            unique_lock<mutex> ul(m);
+            cv.wait(ul,[&]{
+                return count==2 ? true : false;
+            });
+            printNumber(i);
+            count=0;
+            cv.notify_all();
+        }
+    }
+
+    void odd(function<void(int)> printNumber){
+        for(int i=1;i<=n;i+=2){
+            unique_lock<mutex> ul(m);
+            cv.wait(ul,[&]{
+                return count==1 ? true : false;
+            });
+            printNumber(i);
+            count=0;
+            cv.notify_all();
+        }        
+    }
+};
