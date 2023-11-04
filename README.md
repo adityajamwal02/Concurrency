@@ -7,5 +7,13 @@
 ### Concurrency vs Parallelism
 #### In parallelism, we run multiple copies of the same program simultaneously, but they are executed on different data. Concurrent programming involves a shared memory location, and the different threads actually “read” the information provided by the previous threads.
 
+### Concurrency Best Practices
+#### 1) Minizing waiting 2) Minimizing data sharing of mutable data 3) Prefer Immutable data 4) Watch for deadlocks and livelocks
+
+### Mutex (Mutual Exclusion)
+#### A mutex is used to guard shared data such as a linked-list, an array, or any primitive type. A mutex allows only a single thread to access a resource or critical section. Once a thread acquires a mutex, all other threads attempting to acquire the same mutex are blocked until the first thread releases the mutex. [ One Customer at a time ] .
+
+### Semaphore 
+
 ### Applications
 #### Multithreading programs and multithreaded applications are common in modern business systems. One example could be an email server, returning mailbox contents when requested by a user, By using a thread pool, the program can process as many user requests as possible without risking an overload. Another example could be a web crawler, which downloads pages across the web. By using multithreading, the developer would ensure that the web crawler is using as much of the hardware’s capability as possible to download and index multiple pages at once.
